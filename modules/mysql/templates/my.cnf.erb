@@ -1,0 +1,31 @@
+[mysqld_safe]
+socket          = /var/run/mysqld/mysqld.sock
+nice            = 0
+
+[mysqld]
+basedir         = /usr
+datadir         = /var/lib/mysql
+tmpdir          = /tmp
+
+bind-address    = 127.0.0.1
+socket          = /var/run/mysqld/mysqld.sock
+
+language        = /usr/share/mysql/english
+skip-external-locking
+
+expire_logs_days        = 10
+max_binlog_size         = 100M
+
+key_buffer              = <%= mysql_cache_memory %>
+max_allowed_packet      = <%= mysql_cache_memory %>
+thread_stack            = 128K
+thread_cache_size       = 8
+query_cache_limit       = 1M
+query_cache_size        = <%= mysql_cache_memory %>
+
+[client]
+port					= 3306
+socket					= /var/run/mysqld/mysqld.sock
+
+[isamchk]
+key_buffer              = <%= mysql_cache_memory %>
